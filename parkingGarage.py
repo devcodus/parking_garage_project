@@ -16,19 +16,20 @@ class parkingGarage:
             print(f"Unfortunately, we have {self.garage['spaces']} parking spaces left.")
             return self.garage['spaces'] ##why are we returning self.garage['spaces'] here?
         else:
-            print(f"We have {self.garage['spaces']} left")##should we also return self.garage['spaces'] here?
+            print(f"Welcome, we have {self.garage['spaces']} spaces available in the lot at the moment!")##should we also return self.garage['spaces'] here?
             #so how much time do you want to stay? lock it in to the key of the dictionary
             #parking spot 1 : 2 Hrs
 
 #pay for a spot in the garage when they arrive and links to ticket number and time so that time in lot is billed correctly.
     def takeTicket(self):
-        time = input("How many hours do you plan to stay with us today?")
+        time = input("How many hours do you plan to stay with us today? ")
         if time.isdigit():
             #is.digit() checks to see if the value inputted is actually an integer or not
             currentTicket = self.garage['ticketsTaken'] ##why are we setting currentTicket to self.garage['ticketsTaken']???
             self.tickets[currentTicket] = time 
             print (f'Your ticket number is: {currentTicket}')
             self.garage['ticketsTaken'] += 1
+            #next ticket number is gonna be higher starting from 1!
             self.garage['spaces'] -= 1
         else:
             print('Invalid entry, please try again!')
@@ -38,12 +39,20 @@ class parkingGarage:
 #current ticket is key and the value will be time. whenever you store ticket, it will be storing ticket and time
 
     def leaveGarage(self):
-            payoption = input('Would you like to pay with cash or card?')
-            if payoption.lower() == 'cash' or 'card': 
-                payment = int(self.time) * 2
+        #is this ticket id in my dictionary? if it is, we pass that id in and get the value which is time associated with that key!
+            exitTicket = int(input('What is your ticket number? '))
+            print (self.tickets)
+            if not self.tickets[exitTicket]:
+                #true false statement. 
+                print ('Invalid ticket, please try again.')
+                self.leaveGarage()
+            else:
+                payment = int(self.tickets[exitTicket]) * 2
                 print (f'You owe: ${payment}. Thank you for visiting, you have 15 minutes to leave the garage') 
-                self.garage['ticketsTaken'] -= 1
+                payoption = input('Would you like to pay with cash or card? ')
+            if payoption.lower() == 'cash' or 'card': 
                 self.garage['spaces'] += 1
+                print ('Thank you for visting the garage, please come again soon!')
             else: 
                 print(f'You must pay ${payment} before leaving the lot. Please try again.')
                 self.leaveGarage()
@@ -78,4 +87,6 @@ class parkingGarage:
     #     self.tickets += 1
 
 theparkinggarage = parkingGarage()
-print (theparkinggarage.parkingSpaces)
+theparkinggarage.available()
+theparkinggarage.takeTicket()
+theparkinggarage.leaveGarage()
