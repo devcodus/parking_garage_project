@@ -25,66 +25,51 @@ class parkingGarage:
         time = input("How many hours do you plan to stay with us today? ")
         if time.isdigit():
             #is.digit() checks to see if the value inputted is actually an integer or not
-            currentTicket = self.garage['ticketsTaken'] ##why are we setting currentTicket to self.garage['ticketsTaken']???
+            currentTicket = self.garage['ticketsTaken'] 
             self.tickets[currentTicket] = time 
             print (f'Your ticket number is: {currentTicket}')
             self.garage['ticketsTaken'] += 1
             #next ticket number is gonna be higher starting from 1!
             self.garage['spaces'] -= 1
+            #incrementing down as people enter lot
+            reset = input('Do you need another ticket? ')
+            if reset.lower() == 'yes':
+                self.takeTicket()
+            else:
+                self.available()
+            #reset for next customer after ticket is taken
         else:
             print('Invalid entry, please try again!')
             #call function again
-            self.takeTicket() ##why are you calling the function again here? do we need a quit option?  
+            self.takeTicket()
+#current ticket is key and the value will be time. whenever you store ticket, it will be storing ticket and time in tickets dictionary.
+  
 
-#current ticket is key and the value will be time. whenever you store ticket, it will be storing ticket and time
+#Notes to self: Ticket number, locate ticket in tickets dictionary, then multiply time associated with ticket by rate then you owe blah blah cash or card.
+#increment spaces up to account for new availability
 
     def leaveGarage(self):
-        #is this ticket id in my dictionary? if it is, we pass that id in and get the value which is time associated with that key!
+        #is this ticket id in the dict? if it is, we pass that id in and get the value which is time associated with that key!
             exitTicket = int(input('What is your ticket number? '))
             print (self.tickets)
+            #if self.tickets != exitTicket:
             if not self.tickets[exitTicket]:
-                #true false statement. 
+                #"if not" acts as a true false statement (boolean) 
                 print ('Invalid ticket, please try again.')
-                self.leaveGarage()
+                #self.leaveGarage()
             else:
                 payment = int(self.tickets[exitTicket]) * 2
-                print (f'You owe: ${payment}. Thank you for visiting, you have 15 minutes to leave the garage') 
+                print (f'You owe: ${payment}. You have 15 minutes to leave the garage.') 
                 payoption = input('Would you like to pay with cash or card? ')
             if payoption.lower() == 'cash' or 'card': 
                 self.garage['spaces'] += 1
+                #incrementing spaces when lot empties
                 print ('Thank you for visting the garage, please come again soon!')
             else: 
                 print(f'You must pay ${payment} before leaving the lot. Please try again.')
                 self.leaveGarage()
            
-            
 
-            #if they paid they can leave, if they don't then they gotta stay
-            #assign ticket number and locate tickets in ticket dictionary
-            #opposite of what we had up top ... += 1
-
-            
-            
-#Ticket number, locate ticket in tickets dictionary, then multiply time associated with ticket by rate then you owe blah blah cash or card.
-#increment spaces up to account for new availability ##we still have to add incrementSpaces code yeah?
-           
-
-
-    # def payforParking(self):
-    #     time = int(input('How long are you planning on parking with us today?'))
-    #     if time != []:
-    #         time = False
-    #         print ('Your ticket has been paid, you have 15mins to exit the lot! Thank you and have a great day!')
-            # self.currentTicket  = True
-            
-    
-
-    #     #pay for parking is done, so now display message:
-    #     print ('Thank you and have a great day!')
-    #     if unpaid > 0:
-    #         unpaid = int(input('How long would you like to park for?'))
-    #     self.parkingSpaces += 1
-    #     self.tickets += 1
 
 theparkinggarage = parkingGarage()
 theparkinggarage.available()
