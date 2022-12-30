@@ -49,11 +49,11 @@ class parkingGarage:
 #increment spaces up to account for new availability
 
     def leaveGarage(self):
-        #is this ticket id in the dict? if it is, we pass that id in and get the value which is time associated with that key!
+        #is this ticket ID in the dict? if it is, we pass that ID in and get the value which is time associated with that key!
             exitTicket = int(input('What is your ticket number? '))
             print (self.tickets)
             #if self.tickets != exitTicket:
-            if not self.tickets[exitTicket]:
+            if exitTicket not in self.tickets:
                 #"if not" acts as a true false statement (boolean) 
                 print ('Invalid ticket, please try again.')
                 #self.leaveGarage()

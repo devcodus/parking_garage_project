@@ -41,4 +41,7 @@ When the project is completed, commit the final changes, sync all pull requests,
 
 
 ###### List group responsiblities below:
+      #David and I worked on each section together. We took turns navigating and driving (30 mins off/30mins on) to come to our solution!
 ###### Provide name and approxamite line numbers where each person wrote their code
+      #Trinisia 1-77
+      #David 1-77
